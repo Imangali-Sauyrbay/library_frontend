@@ -1,0 +1,56 @@
+{
+    "app": {
+        "loader": {
+            "text": "Loading..."
+        },
+
+        "loading": {
+            "error": "Error loading \"{0}\"\nPlease check your internet connection first!\n{1}",
+            "retrySeconds": "Retry now | Will retry after {n} second | Will retry after {n} seconds"
+        },
+
+        "actions": {
+            "confirm": "Confirm",
+            "cancel": "Cancel"
+        }
+    },
+
+    "pages": {
+        "welcome": {
+            "card": {
+                "title": "Welcome",
+                "text": "to the website of the library of the South Kazakhstan University named after. M.Auezov.",
+                "info": "{register} or {login} to use this website!",
+                "register": "Register",
+                "login": "Login"
+            },
+            "notifications": {
+                "info": "Did you know?",
+                "infoText": "Leaves interfere with reading?\nClick on the card!"
+            },
+            "imageProgressMsg": "Assests loaded: ({0}/{1})",
+            "imagesNotLoadedMsg": "Not all assets were loaded fully!\nPlease, check your connection!",
+            "usingMotion": "Using Device motion instead (can lead to unexpected behavior)",
+            "usingManual": "Using mouse/touch instead (touch and move for parallax effect!)",
+            "browserNotSupportOrientation": "Your browser not support device orientation!\n@:pages.welcome.usingMotion",
+            "browserNotSupportMotion": "Your browser not support device motion!\n@:pages.welcome.usingManual",
+            "protocolNotSupportOrientation": "Device oriantation can be used only with https connection!\n@:pages.welcome.usingMotion",
+            "protocolNotSupportMotion": "Device motion can be used only with https connection!\n@:pages.welcome.usingManual"
+        }
+    },
+
+    "lang": {
+        "title": "Languages",
+        "loading": "Loading language \"{lang}\"...",
+        "error": "Loading language \"{lang}\" error!\nCheck you connection!",
+        "placeholders": {
+            "select": "Please select a language"
+        },
+
+        "languages": {
+            "en": "🇺🇸🇬🇧 English",
+            "kk": "🇰🇿 Kazakh",
+            "ru": "🇷🇺 Russian"
+        }
+    }
+}

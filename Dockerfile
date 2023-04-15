@@ -11,7 +11,6 @@ FROM nginx:stable-alpine as nginx
 
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY --from=build /app/dist /usr/share/nginx/html
-COPY --from=build /app/public /usr/share/nginx/html
 
 EXPOSE 80
 

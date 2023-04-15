@@ -16,7 +16,7 @@ onMounted(() => {
     const chance = mobile ? 80 : 30
     const number = random(0, 100)
 
-    if (number > chance && localStorage.getItem(key)) return
+    if (number > chance || localStorage.getItem(key)) return
 
     ElNotification({
         title: t('pages.welcome.notifications.info'),

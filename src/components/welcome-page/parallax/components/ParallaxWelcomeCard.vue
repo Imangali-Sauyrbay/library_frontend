@@ -15,7 +15,7 @@ const { t } = useI18n()
             {{ t('pages.welcome.card.text') }}
         </p>
 
-        <i18n-t keypath="pages.welcome.card.info" tag="p" class="welcome-links">
+        <i18n-t keypath="pages.welcome.card.info" tag="p" class="welcome-links" scope="global">
             <template #register>
                 <RouterLink :to="{name: 'register'}">
                     {{ t('pages.welcome.card.register') }}

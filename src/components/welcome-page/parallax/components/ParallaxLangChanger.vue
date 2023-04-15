@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
 import { ElIcon, ElMessage } from 'element-plus'
-import 'element-plus/es/components/icon/style/css'
-import 'element-plus/es/components/message/style/css'
 import { useI18n } from 'vue-i18n'
 import { asyncSetLocale, SUPPORT_LOCALES, type LocaleValue } from '@/i18n'
 import AppLoader from '@/components/AppLoader.vue'

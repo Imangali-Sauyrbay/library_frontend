@@ -2,7 +2,6 @@
 import { ref, onMounted, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { ElMessage } from 'element-plus'
-import 'element-plus/es/components/message/style/css'
 import AppLoader from '@/components/AppLoader.vue'
 import { ensureImagesAreLoaded, urlsToAllAssets } from './utils/parallaxImages'
 import ParallaxContainer from './components/ParallaxContainer.vue'

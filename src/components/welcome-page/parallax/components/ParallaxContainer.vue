@@ -2,7 +2,6 @@
 import { onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { ElNotification } from 'element-plus'
-import 'element-plus/es/components/notification/style/css'
 import { random } from '@/utils/Random';
 import useMobileDevice from '@/hooks/useMobileDevice';
 

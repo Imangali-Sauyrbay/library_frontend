@@ -20,8 +20,8 @@ const items = reactive<IParallaxCloud[]>(
         getClouds({
             count: isMobile() ? 7 : 15,
             depthStep: isMobile() ? +(0.2 / 7).toFixed(3) : +(0.2 / 15).toFixed(3),
-            closeDuration: isMobile() ? 120 : 240,
-            farDuration: isMobile() ? 200 : 400,
+            closeDuration: isMobile() ? 150 : 300,
+            farDuration: isMobile() ? 300 : 600,
             maxY: clamp((1 - getBuildingHeightPercent()) * 100, 15, 90) + 10
         }),
 

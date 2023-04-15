@@ -1,7 +1,6 @@
 <script lang="ts" setup>
     import { onBeforeMount, onBeforeUnmount, onMounted, ref, watch } from 'vue';
     import { ElLoading } from 'element-plus'
-    import 'element-plus/es/components/loading/style/css'
 
     const svg = `
         <path class="path" d="

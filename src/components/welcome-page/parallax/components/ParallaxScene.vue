@@ -4,7 +4,6 @@ import type { VNodeRef } from 'vue'
 import type { ParallaxType } from './../Parallax'
 import useMobileDevice from '@/hooks/useMobileDevice'
 import { ElMessage } from 'element-plus'
-import 'element-plus/es/components/message/style/css'
 import { useI18n } from 'vue-i18n'
 import debounce from '@/utils/Debounce'
 

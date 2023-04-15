@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ElIcon } from 'element-plus'
 import { Close } from '@element-plus/icons-vue'
-import 'element-plus/es/components/icon/style/css'
 
 defineEmits<{
     (event: 'clicked'): void

@@ -3,7 +3,6 @@ import { ref, watch } from 'vue'
 import raf from 'raf'
 import { clamp } from '@/utils/Clamp'
 import { ElProgress } from 'element-plus'
-import 'element-plus/es/components/progress/style/css'
 
 const progressTimerStart = ref(0)
 const progress = ref(0)

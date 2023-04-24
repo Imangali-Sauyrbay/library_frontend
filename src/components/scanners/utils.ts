@@ -1,4 +1,4 @@
-import { BinaryBitmap, HTMLCanvasElementLuminanceSource, HybridBinarizer, LuminanceSource, RGBLuminanceSource } from "@zxing/library"
+import { BinaryBitmap, HTMLCanvasElementLuminanceSource, HybridBinarizer, LuminanceSource } from "@zxing/library"
 
 type ContextReturn =  {
     w: number

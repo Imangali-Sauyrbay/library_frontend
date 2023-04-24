@@ -6,6 +6,7 @@ import useMobileDevice from '@/hooks/useMobileDevice'
 import { ElMessage } from 'element-plus'
 import { useI18n } from 'vue-i18n'
 import debounce from '@/utils/Debounce'
+import { isHTTPS } from '@/utils/CommonUtils'
 
 const { ifMobile } = useMobileDevice()
 const { t } = useI18n()
@@ -19,7 +20,8 @@ const warn = (translationKey: string) => () => {
     ElMessage({
         type: 'warning',
         message: t(translationKey),
-        duration: 10000
+        duration: 10000,
+        showClose: true
     })
 }
 
@@ -34,7 +36,7 @@ const startParralax = async () => {
     try {
         const { Parallax } = await import('./../Parallax')
         
-        const isSecureConnection = window.location.protocol.startsWith('https')
+        const isSecureConnection = isHTTPS()
         
         const orientMsg = isSecureConnection
         ? 'browserNotSupportOrientation'

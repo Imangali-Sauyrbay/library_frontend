@@ -40,45 +40,6 @@ defineProps<prop>()
     animation: branch-shake 5s ease-in-out infinite;
 }
 
-@include breakpoint('xxxs') {
-    .branch {
-        height: 10%;
-    }
-
-    .branch.left {
-        left: -55%;
-    }
-
-    .branch.right {
-        left: 55%;
-    }
-}
-
-@include breakpoint('xxs') {
-    .branch {
-        height: 12%;
-    }
-}
-
-@include breakpoint('xs') {
-    .branch {
-        height: 14%;
-    }
-}
-
-@include breakpoint('sm') {
-    .branch {
-        height: 18%;
-    }
-}
-
-@include breakpoint('lg') {
-    .branch {
-        height: 24%;
-    }
-}
-
-
 .branch-1 {
     background-image: url(@/assets/welcome-parallax/parts/branch_1.png);
 }
@@ -89,6 +50,58 @@ defineProps<prop>()
 
 .branch-3 {
     background-image: url(@/assets/welcome-parallax/parts/branch_corner.png);
+}
+
+
+@include breakpoint('xxxs') {
+  .branch {
+    height: 10%;
+  }
+
+  .branch-1 {
+    height: 8%;
+  }
+
+  .branch.left {
+    left: -55%;
+  }
+
+  .branch.right {
+    left: 55%;
+  }
+}
+
+@include breakpoint('xxs') {
+  .branch {
+    height: 12%;
+  }
+
+  .branch-1 {
+    height: 9%;
+  }
+
+}
+
+@include breakpoint('xs') {
+  .branch {
+    height: 14%;
+  }
+
+  .branch-1 {
+    height: 11%;
+  }
+}
+
+@include breakpoint('sm') {
+  .branch {
+    height: 18%;
+  }
+}
+
+@include breakpoint('lg') {
+  .branch {
+    height: 24%;
+  }
 }
 
 @keyframes branch-shake {

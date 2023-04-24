@@ -21,15 +21,15 @@ interface IGetCloudProps {
     closeDuration?: number
 }
 
-const start = -100
-const end = 200
+const start = -70
+const end = 170
 const {p1, p2} = easeInOutControlPoints(start, end)
 
 const getClouds = (props: IGetCloudProps = {}) => {
     const {
         count=~~(2 / 0.2),
-        minX=-40,
-        maxX=140,
+        minX=-10,
+        maxX=90,
         minY=-5,
         maxY=60,
         minDepth=0.2,

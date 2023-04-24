@@ -10,7 +10,9 @@ import ParallaxProgress from './ParallaxProgress.vue'
 import ParallaxSoundButton from './ParallaxSoundButton.vue'
 import ParallaxSoundPlayer from './ParallaxSoundPlayer.vue'
 import ParallaxLangChanger from './ParallaxLangChanger.vue'
+import { useSessionStorage } from '@vueuse/core';
 
+const stateIsOpenedValue = useSessionStorage('app-welcome-card-state', true)
 const isOpened = ref(true)
 const isSoundOn = ref(false)
 const widthChanged = ref(false)
@@ -22,7 +24,7 @@ const minRect = ref<DOMRect>()
 const transform = ref('')
 const isTransitionActive = ref(false)
 const progress = ref(0)
-const SHOW_TIME = 7000
+const SHOW_TIME = 15000
 
 
 const { show, hide } = (() => {
@@ -89,6 +91,7 @@ const setTransform = () => {
 
 const toggle = () => {
     isOpened.value = !isOpened.value
+    stateIsOpenedValue.value = isOpened.value
     isTransitionActive.value = true
     setTransform()
 }
@@ -122,6 +125,8 @@ const snapshotCardRect = () => {
     card.value.style.transform = getTranslateByToggle()
     transform.value = getTranslateByToggle()
     card.value.style.transition = ''
+
+    isOpened.value = stateIsOpenedValue.value
 }
 
 const hideTimeOut = ref<number>()
@@ -145,7 +150,7 @@ onMounted(() => {
     setCardHeight()
     setTimeout(() => {
         isReady.value = true
-    },1000)
+    }, 1000)
     window.addEventListener('resize', debounce(onResize, 500))
 })
 
@@ -279,14 +284,6 @@ onBeforeMount(() => {
     @include breakpoint('xxl') {
         margin-bottom: calc(75px - 1rem);
     }
-}
-.content::-webkit-scrollbar {
-  width: 5px;
-}
-.content::-webkit-scrollbar-thumb {
-  background-color:  rgba(240, 225, 255, 0.7);
-  border-radius: 5px;
-  border: none;
 }
 
 .card.closed {

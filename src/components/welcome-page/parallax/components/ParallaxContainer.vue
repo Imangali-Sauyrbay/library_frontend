@@ -17,14 +17,16 @@ onMounted(() => {
 
     if (number > chance || localStorage.getItem(key)) return
 
-    ElNotification({
-        title: t('pages.welcome.notifications.info'),
-        message: t('pages.welcome.notifications.infoText'),
-        type: 'info',
-        duration: random(4000, 7000)
-    })
-
-    localStorage.setItem(key, 'true')
+    setTimeout(() => {
+        ElNotification({
+            title: t('pages.welcome.notifications.info'),
+            message: t('pages.welcome.notifications.infoText'),
+            type: 'info',
+            duration: random(5000, 15000)
+        })
+        
+        localStorage.setItem(key, 'true')
+    }, 5000)
 })
 </script>
 

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ElIcon } from 'element-plus'
-import { Close } from '@element-plus/icons-vue'
+import { CloseBold } from '@element-plus/icons-vue'
 
 defineEmits<{
     (event: 'clicked'): void
@@ -9,7 +9,7 @@ defineEmits<{
 
 <template>
     <div class="close" @click.stop="$emit('clicked')">
-        <el-icon color="white"><Close /></el-icon>
+        <el-icon color="white"><CloseBold /></el-icon>
     </div>
 </template>
 

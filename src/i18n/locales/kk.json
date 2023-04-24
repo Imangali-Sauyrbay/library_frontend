@@ -12,6 +12,11 @@
         "actions": {
             "confirm": "Растау",
             "cancel": "Болдырмау"
+        },
+
+        "errors": {
+            "notFound": "Not Found!",
+            "notFoundDesc": "The page you are looking for does not exist."
         }
     },
 
@@ -36,6 +41,13 @@
             "browserNotSupportMotion": "Сіздің браузеріңіз козғалыс детекторын қолдамайды!\n@:pages.welcome.usingManual",
             "protocolNotSupportOrientation": "Гироскоп тек https байланыспен ғана қол жетімді!\n@:pages.welcome.usingMotion",
             "protocolNotSupportMotion": "Қозғалыс детекторын тек https байланыспен ғана қол жетімді!\n@:pages.welcome.usingManual"
+        },
+
+        "auth": {
+            "email": "Электронды Почта",
+            "password": "Құпия сөз",
+            "confirmPassword": "Құпия сөзді қайталаңыз",
+            "register": "Тіркелу"
         }
     },
 

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { RouterLink } from 'vue-router';
+import { RouterLink } from 'vue-router'
 import ParallaxCard from './ParallaxCard.vue'
 import { useI18n } from 'vue-i18n'
 

@@ -13,6 +13,11 @@
         "actions": {
             "confirm": "Подтвердить",
             "cancel": "Отмена"
+        },
+
+        "errors": {
+            "notFound": "Not Found!",
+            "notFoundDesc": "The page you are looking for does not exist."
         }
     },
 
@@ -37,6 +42,13 @@
             "browserNotSupportMotion": "Ваш браузер не поддерживает движение устроиства!\n@:pages.welcome.usingManual",
             "protocolNotSupportOrientation": "Device oriantation может быть использован только с https подключением!\n@:pages.welcome.usingMotion",
             "protocolNotSupportMotion": "Device motion может быть использован только с https подключением!\n@:pages.welcome.usingManual"
+        },
+
+        "auth": {
+            "email": "Электронная Почта",
+            "password": "Пароль",
+            "confirmPassword": "Повторите Пароль",
+            "register": "Регистрация"
         }
     },
 

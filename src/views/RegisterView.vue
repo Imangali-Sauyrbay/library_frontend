@@ -1,15 +1,13 @@
 <script lang="ts" setup>
-import GuestLayout from '@/components/layouts/GuestLayout.vue'
+import { defineAsyncComponent } from 'vue'
+import RegisterCardSkeleton from '@/components/app-card/AppCardSkeleton.vue'
+
+const RegisterCard = defineAsyncComponent({
+    loader: () => import('@/components/auth/RegisterCard.vue'),
+    loadingComponent: RegisterCardSkeleton
+})
 </script>
 
 <template>
-    <GuestLayout>
-        <div>
-            <h1>Register</h1>
-        </div>
-    </GuestLayout>
+    <RegisterCard />
 </template>
-
-<style scoped>
-
-</style>

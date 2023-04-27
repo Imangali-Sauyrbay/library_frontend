@@ -1,0 +1,130 @@
+{
+    "app": {
+        "loader": {
+            "text": "Loading..."
+        },
+
+        "loading": {
+            "error": "Error loading \"{0}\"\nPlease check your internet connection first!\n{1}",
+            "retrySeconds": "Retry now | Will retry after {n} second | Will retry after {n} seconds"
+        },
+
+        "actions": {
+            "confirm": "Confirm",
+            "cancel": "Cancel",
+            "understood": "Ok",
+            "next": "Next"
+        },
+
+        "errors": {
+            "notFound": "Not Found!",
+            "notFoundDesc": "The page you are looking for does not exist."
+        },
+
+        "redirects": {
+            "toLogin": "Already have an account? then {login}!",
+            "login": "login",
+            "toRegistration": "You don't have account? then {login} one!",
+            "register": "register"
+        },
+
+        "permissions": {
+            "title": "Attention!",
+            "text": "We need your permission for using {permission}! This is for better user experience!",
+            "textDenied": "It seems that you denied permission for using {permission}! For the better user experience you need to enable permissions in browsers setting!",
+            "camera": "Camera",
+            "apiNotSupported": "Your browser not support api for {api}!",
+            "onlyHTTPS": "{api} can be used only over HTTPS connection!"
+        },
+
+        "titles": {
+            "home": "Uku Library",
+            "login": "Login Page",
+            "register": "Register Page",
+            "notFound": "The page {page} not found!",
+            "welcome": "Welcome to Library",
+            "qr": "Scan QR page",
+            "menu": "Main Menu",
+            "search": "Search"
+        },
+
+        "map": {
+            "searchPlaceholder": "Enter an address...",
+            "loadingText": "Loading...",
+            "errors": {
+                "unknown": "Occured some error, please try again!",
+                "positionUnavailable": "Position unavailable!",
+                "permissionDenied": "Permission denied!",
+                "timedOut": "Timed out!"
+            }
+        }
+    },
+
+    "pages": {
+        "welcome": {
+            "card": {
+                "title": "Welcome",
+                "text": "to the website of the library of the South Kazakhstan University named after. M.Auezov.",
+                "info": "{register} or {login} to use this website!",
+                "register": "Register",
+                "login": "Login"
+            },
+
+            "notifications": {
+                "info": "Did you know?",
+                "infoText": "Leaves interfere with reading?\nClick on the card!"
+            },
+
+            "lowFps": "Leaves was reduced by {removedPlants} and Clouds was reduced by {removedClouds} for the better performance! Average fps was: {avgFps}",
+
+            "imageProgressMsg": "Assests loaded: ({0}/{1})",
+            "imagesNotLoadedMsg": "Not all assets were loaded fully!\nPlease, check your connection!",
+            "usingMotion": "Using Device motion instead (can lead to unexpected behavior)",
+            "usingManual": "Using mouse/touch instead (touch and move for parallax effect!)",
+            "browserNotSupportOrientation": "Your browser not support device orientation!\n@:pages.welcome.usingMotion",
+            "browserNotSupportMotion": "Your browser not support device motion!\n@:pages.welcome.usingManual",
+            "protocolNotSupportOrientation": "Device oriantation can be used only with https connection!\n@:pages.welcome.usingMotion",
+            "protocolNotSupportMotion": "Device motion can be used only with https connection!\n@:pages.welcome.usingManual"
+        },
+
+        "auth": {
+            "email": "Email",
+            "password": "Password",
+            "confirmPassword": "Confirm Password",
+            "register": "Register",
+            "login": "Login"
+        },
+
+        "nav": {
+            "home": "Main Page",
+            "qr": "Scan",
+            "menu": "Main Menu",
+            "search": "Search"
+        },
+
+        "library": {
+            "mapSelectInfo": "Please, select library address and click next! Or click next for manuall filling address!"
+        }
+    },
+
+    "lang": {
+        "title": "Languages",
+        "loading": "Loading language \"{lang}\"...",
+        "error": "Loading language \"{lang}\" error!\nCheck you connection!",
+        "placeholders": {
+            "select": "Please select a language"
+        },
+
+        "languages": {
+            "en": "🇺🇸🇬🇧 English",
+            "kk": "🇰🇿 Kazakh",
+            "ru": "🇷🇺 Russian"
+        }
+    },
+
+    "validation": {
+        "invalidEmail": "Please enter a valid email!",
+        "minLength": "{field} should be at least {n} characters!",
+        "passwordNotMatch": "Passwords not match!"
+    }
+}

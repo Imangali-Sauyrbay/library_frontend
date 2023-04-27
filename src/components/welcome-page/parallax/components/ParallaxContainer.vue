@@ -1,0 +1,47 @@
+<script lang="ts" setup>
+import { onMounted } from 'vue'
+import { useI18n } from 'vue-i18n'
+import { ElNotification } from 'element-plus'
+import { random } from '@/utils/Random';
+import useMobileDevice from '@/hooks/useMobileDevice';
+
+const { t } = useI18n()
+const { isMobile } = useMobileDevice()
+
+onMounted(() => {
+    const mobile = isMobile()
+    const key = 'isShowedWelcomePageNotification'
+
+    const chance = mobile ? 80 : 30
+    const number = random(0, 100)
+
+    if (number > chance || localStorage.getItem(key)) return
+
+    setTimeout(() => {
+        ElNotification({
+            title: t('pages.welcome.notifications.info'),
+            message: t('pages.welcome.notifications.infoText'),
+            type: 'info',
+            duration: random(5000, 15000)
+        })
+        
+        localStorage.setItem(key, 'true')
+    }, 5000)
+})
+</script>
+
+<template>
+    <div class="parallax-container">
+        <slot></slot>
+    </div>
+</template>
+
+<style scoped>
+.parallax-container {
+    position: absolute;
+    overflow: hidden;
+    display: table;
+    left: 0;
+    top: 0;
+}
+</style>

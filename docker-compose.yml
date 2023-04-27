@@ -3,8 +3,11 @@ services:
   web:
     build:
       context: ./
-      dockerfile: ./Dockerfile
+      dockerfile: ./Dockerfile.dev
     container_name: frontend_lib
     restart: unless-stopped
+    user: ${UID}:${GID}
+    volumes:
+      - ./:/app
     ports:
-      - "8080:80"
+      - "8080:5173"

@@ -5,6 +5,8 @@ import AppCardForm from '@/components/app-card/AppCardForm.vue'
 import { onMounted, reactive, ref, type ComponentPublicInstance } from 'vue'
 import { ElFormItem, ElInput, ElButton, ElForm, type FormRules, type FormInstance } from 'element-plus'
 import { useI18n } from 'vue-i18n'
+import authService from '@/services/AuthService'
+import { useRouter } from 'vue-router'
 
 const { t } = useI18n()
 
@@ -38,13 +40,17 @@ const rules = reactive<FormRules>({
     ]
 })
 
+const router = useRouter()
+
 const onSubmit = async (formEl: FormInstance | undefined) => {
     if (!formEl) return
 
-    await formEl.validate((isValid) => {
+    await formEl.validate(async (isValid) => {
         if (!isValid) return
-        alert('ok')
     })
+
+    await authService.login()
+        router.push({name: 'home'})
 }
 
 onMounted(() => {

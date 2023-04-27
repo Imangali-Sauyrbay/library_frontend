@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { shallowRef } from 'vue'
 import { ElIcon, ElText } from 'element-plus'
-import { School } from '@element-plus/icons-vue'
+import { School, Collection } from '@element-plus/icons-vue'
 
 const items = [
     {name: 'library-create', text: 'Add Library', icon: shallowRef(School)},
-    {name: 'home', text: 'Libfsdf fdsdfsf', icon: shallowRef(School)},
+    {name: 'add-book', text: 'Add Book', icon: shallowRef(Collection)},
     {name: 'home', text: 'Libsdfsdfsd ', icon: shallowRef(School)},
     {name: 'home', text: 'Lifb', icon: shallowRef(School)},
     {name: 'home', text: 'Lisdf b', icon: shallowRef(School)},

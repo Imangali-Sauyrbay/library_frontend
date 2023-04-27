@@ -75,13 +75,13 @@ const router = useRouter()
 const libService = new LibraryService()
 const submit = async (formEl: FormInstance | undefined) => {
     if(!formEl) return
-
+    
     await formEl.validate(async (isValid) => {
         if(! isValid) return
 
         isLoading.value = true
         try{
-            const result = await libService.addNew({
+            const result = await libService.addLibrary({
                 displayName: form.displayAddress,
                 title: form.title,
                 coords: [form.lat, form.lng]

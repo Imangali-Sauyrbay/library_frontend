@@ -6,11 +6,19 @@ type UserAuthCheckResponce = {
 }
 
 class AuthService extends Service {
+    private isAuth = false
+
     public async isUserAuthenthicated(): Promise<UserAuthCheckResponce> {
-        return {isAuth: true, user: {}}
+        return {isAuth: this.isAuth, user: {}}
+    }
+
+    public async login() {
+        await new Promise(res => setTimeout(res, 2000))
+        this.isAuth = true
+        return true
     }
 }
 
-const service = new AuthService('https://jsonplaceholder.typicode.com')
+const service = new AuthService()
 
 export default service

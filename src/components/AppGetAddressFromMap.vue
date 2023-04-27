@@ -145,7 +145,7 @@ const handleMapClick = (e: L.LeafletMouseEvent) => {
 
     geoCoder.reverse(e.latlng, map.options.crs!.scale(18), results => {
         const res = results[0]
-        console.log(res.properties.address)
+
         if(!res) return
         result.value = res
         

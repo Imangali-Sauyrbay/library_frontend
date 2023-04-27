@@ -42,7 +42,14 @@ const route: RouteRecordRaw = {
                     name: 'library-create',
                     component: () => import('@views/AddLibraryView.vue'),
                     meta: {
-                        title: 'search',
+                        auth: true
+                    }
+                },
+                {
+                    path: 'book/add',
+                    name: 'add-book',
+                    component: () => import('@views/AddBookView.vue'),
+                    meta: {
                         auth: true
                     }
                 }

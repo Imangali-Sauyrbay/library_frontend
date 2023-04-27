@@ -5,16 +5,16 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import VueI18nPlugin from '@intlify/unplugin-vue-i18n/vite'
 import ElementPlus from 'unplugin-element-plus/vite'
-// import mkcert from 'vite-plugin-mkcert'
+import mkcert from 'vite-plugin-mkcert'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  server: {
-    https: {
-      key: resolve(dirname(fileURLToPath(import.meta.url)), './192.168.1.7-key.pem'),
-      cert: resolve(dirname(fileURLToPath(import.meta.url)), './192.168.1.7.pem'),
-    }
-  },
+  // server: {
+  //   https: {
+  //     key: resolve(dirname(fileURLToPath(import.meta.url)), './192.168.1.7-key.pem'),
+  //     cert: resolve(dirname(fileURLToPath(import.meta.url)), './192.168.1.7.pem'),
+  //   }
+  // },
   plugins: [
     vue(),
     ElementPlus({}),
@@ -22,7 +22,7 @@ export default defineConfig({
       allowDynamic: true,
       include: resolve(dirname(fileURLToPath(import.meta.url)), './src/i18n/locales/**'),
     }),
-    // mkcert({hosts: ['localhost', '192.168.0.0']})
+    mkcert({hosts: ['localhost', '192.168.0.0']})
   ],
   resolve: {
     alias: {

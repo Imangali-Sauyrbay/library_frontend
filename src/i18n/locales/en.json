@@ -63,7 +63,7 @@
     "pages": {
         "welcome": {
             "card": {
-                "title": "Welcome",
+                "title": "WELCOME!",
                 "text": "to the website of the library of the South Kazakhstan University named after. M.Auezov.",
                 "info": "{register} or {login} to use this website!",
                 "register": "Register",

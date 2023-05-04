@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import type { geocoders } from 'leaflet-control-geocoder'
-import { computed, reactive, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 
 import {
     ElForm,
@@ -14,22 +13,20 @@ import {
 type FormRules,
 type FormInstance
 } from 'element-plus'
-import LibraryService from '@/services/LibraryService'
+
 import { HttpStatusCode } from 'axios'
 import { useRouter } from 'vue-router'
+import type { NomitnatimResponce } from '../types'
+import { useLibraryFormStore } from '@/stores/libraryFormStore'
 
 const props = defineProps<{
-    result?: geocoders.GeocodingResult
+    result?: NomitnatimResponce
 }>()
 
 const isLoading = ref(false)
 const formRef = ref<FormInstance>()
-const form = reactive({
-    title: '',
-    displayAddress: props.result?.name || '',
-    lat: props.result?.center.lat || 0,
-    lng: props.result?.center.lng || 0
-})
+
+const { reset, send, form, set } = useLibraryFormStore()
 
 const rules = ref<FormRules>({
     title: {
@@ -38,7 +35,7 @@ const rules = ref<FormRules>({
         message: 'Min Length 3 char!'
     },
 
-    displayAddress: {
+    displayName: {
         min: 3,
         required: true,
         message: 'Min Length 3 char!'
@@ -72,7 +69,7 @@ const showNotification = (message: string, title: string = '', type: 'error' | '
 }
 
 const router = useRouter()
-const libService = new LibraryService()
+
 const submit = async (formEl: FormInstance | undefined) => {
     if(!formEl) return
     
@@ -81,16 +78,16 @@ const submit = async (formEl: FormInstance | undefined) => {
 
         isLoading.value = true
         try{
-            const result = await libService.addLibrary({
-                displayName: form.displayAddress,
-                title: form.title,
-                coords: [form.lat, form.lng]
-            })
-
+            const result = await send()
+            
             if(result.status === HttpStatusCode.Created) {
                 showNotification('Library is added!', 'Success')
+                reset()
                 router.push({name: 'home'})
+            } else {
+                showNotification('Send Successfull, but server send wrong code!', 'Success')
             }
+
         } catch (e) {
             console.warn(e)
             showNotification('Error adding!', 'Error', 'error')
@@ -99,6 +96,12 @@ const submit = async (formEl: FormInstance | undefined) => {
         isLoading.value = false
     })
 }
+
+onMounted(() => {
+    if(props.result) {
+        set(props.result)
+    }
+})
 </script>
 
 <template>
@@ -113,31 +116,127 @@ const submit = async (formEl: FormInstance | undefined) => {
                 <ElInput v-model="form.title"/>
             </ElFormItem>
 
-            <ElFormItem label="Address Display Name" prop="displayAddress">
-                <ElInput type="textarea" v-model="form.displayAddress"/>
+            <ElFormItem label="Address Display Name" prop="address.displayName">
+                <ElInput type="textarea" v-model="form.address.displayName"/>
             </ElFormItem>
+
             <ElDivider contentPosition="center">
                 Coordinates of library
             </ElDivider>
             <div class="column">
-                <ElFormItem label="Address Lattitude" prop="lat">
+                <ElFormItem label="Address Lattitude" prop="address.lat">
                     <ElInputNumber
                     :controls="false"
                     :disabled="isCoodrsDisabled"
-                    v-model="form.lat"/>
+                    v-model="form.address.lat"/>
                 </ElFormItem>
 
-                <ElFormItem label="Address Longitude" prop="lng">
+                <ElFormItem label="Address Longitude" prop="address.lng">
                     <ElInputNumber
                     :controls="false"
                     :disabled="isCoodrsDisabled"
-                    v-model="form.lng"/>
+                    v-model="form.address.lng"/>
                 </ElFormItem>
             </div>
             <ElDivider />
+
             <ElFormItem>
                 <ElButton v-loading="isLoading" class="right" type="primary" @click="submit(formRef)">Submit</ElButton>
             </ElFormItem>
+
+            <ElDivider contentPosition="center">
+                Additional data
+            </ElDivider>
+
+            <div>
+                <ElFormItem label="Amenity">
+                    <ElInput v-model="form.address.amenity"/>
+                </ElFormItem>
+
+                <ElFormItem label="aeroway">
+                    <ElInput v-model="form.address.aeroway"/>
+                </ElFormItem>
+
+                <ElFormItem label="Railway">
+                    <ElInput v-model="form.address.railway"/>
+                </ElFormItem>
+
+                <ElFormItem label="Road">
+                    <ElInput v-model="form.address.road"/>
+                </ElFormItem>
+
+                <ElFormItem label="Building">
+                    <ElInput v-model="form.address.building"/>
+                </ElFormItem>
+
+                <ElFormItem label="House number">
+                    <ElInput v-model="form.address.house_number"/>
+                </ElFormItem>
+
+                <ElFormItem label="Landuse">
+                    <ElInput v-model="form.address.landuse"/>
+                </ElFormItem>
+
+                <ElFormItem label="Municipality">
+                    <ElInput v-model="form.address.municipality"/>
+                </ElFormItem>
+
+                <ElFormItem label="Neighbourhood">
+                    <ElInput v-model="form.address.neighbourhood"/>
+                </ElFormItem>
+
+                <ElFormItem label="City district">
+                    <ElInput v-model="form.address.city_district"/>
+                </ElFormItem>
+
+                <ElFormItem label="City">
+                    <ElInput v-model="form.address.city"/>
+                </ElFormItem>
+
+                <ElFormItem label="Hamlet">
+                    <ElInput v-model="form.address.hamlet"/>
+                </ElFormItem>
+
+                <ElFormItem label="Village">
+                    <ElInput v-model="form.address.village"/>
+                </ElFormItem>
+
+                <ElFormItem label="Town">
+                    <ElInput v-model="form.address.town"/>
+                </ElFormItem>
+
+                <ElFormItem label="County">
+                    <ElInput v-model="form.address.county"/>
+                </ElFormItem>
+
+                <ElFormItem label="Suburb">
+                    <ElInput v-model="form.address.suburb"/>
+                </ElFormItem>
+
+                <ElFormItem label="State">
+                    <ElInput v-model="form.address.state"/>
+                </ElFormItem>
+
+                <ElFormItem label="State district">
+                    <ElInput v-model="form.address.state_district"/>
+                </ElFormItem>
+
+                <ElFormItem label="Postcode">
+                    <ElInput v-model="form.address.postcode"/>
+                </ElFormItem>
+
+                <ElFormItem label="ISO3166-2-lvl4">
+                    <ElInput v-model="form.address['ISO3166-2-lvl4']"/>
+                </ElFormItem>
+
+                <ElFormItem label="Country">
+                    <ElInput v-model="form.address.country"/>
+                </ElFormItem>
+
+                <ElFormItem label="Country code">
+                    <ElInput v-model="form.address.country_code"/>
+                </ElFormItem>
+            </div>
         </ElForm>
     </ElContainer>
 </template>
@@ -146,12 +245,16 @@ const submit = async (formEl: FormInstance | undefined) => {
     .container {
         width: 100%;
         height: 100%;
+        max-height: 100%;
         justify-content: center;
+        overflow-y: scroll;
     }
 
     .form {
         margin: 20px 5px;
-        width: 500px
+        width: 100%;
+        max-width: 500px;
+        height: fit-content;
     }
 
     .right {

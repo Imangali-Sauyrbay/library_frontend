@@ -126,6 +126,7 @@ const toggle = () => {
 
 <style scoped>
 .container {
+    position: relative;
     top: 0;
     left: 0;
     width: 100%;

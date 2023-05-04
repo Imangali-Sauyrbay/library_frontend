@@ -43,7 +43,7 @@
             "register": "Register Page",
             "notFound": "The page {page} not found!",
             "welcome": "Welcome to Library",
-            "qr": "Scan QR page",
+            "scan": "Scan QR page",
             "menu": "Main Menu",
             "search": "Search"
         },
@@ -97,7 +97,7 @@
 
         "nav": {
             "home": "Main Page",
-            "qr": "Scan",
+            "scan": "Scan",
             "menu": "Main Menu",
             "search": "Search"
         },

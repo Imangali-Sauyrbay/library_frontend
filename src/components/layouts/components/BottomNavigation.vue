@@ -43,6 +43,10 @@ const toAllocate = computed(() => Math.floor(24 / props.paths.length))
 .footer {
     background-color: #ccc;
     box-shadow: 0 0 10px 0 black;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
     z-index: 999;
 
     transition: all .4s ease-in-out;

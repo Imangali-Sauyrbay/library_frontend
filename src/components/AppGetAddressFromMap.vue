@@ -16,17 +16,18 @@ import eventBus from '@/composables/eventBus'
 import { isHTTPS } from '@/utils/CommonUtils'
 import type { FinishGeocodeEvent, GeocoderControl } from 'leaflet-control-geocoder/dist/control'
 import { useI18n } from 'vue-i18n'
+import type { NomitnatimResponce } from './types'
 
 const { t, locale } = useI18n()
 
 const emit = defineEmits<{
-    (event: 'next', result?: geocoders.GeocodingResult): void
+    (event: 'next', result?: NomitnatimResponce): void
 }>()
 
 const mapElement = ref<HTMLElement>()
 const isSecure = isHTTPS()
 const defaultPosition: L.LatLngExpression = [42.3200446, 69.5920421] //Auezov University
-const result = ref<geocoders.GeocodingResult>()
+const result = ref<NomitnatimResponce>()
 
 let map: L.Map
 
@@ -93,6 +94,7 @@ const myPlace = () => {
     })
 }
 
+
 const next = () => {
     emit('next', result.value)
 }
@@ -124,7 +126,7 @@ const checkMarker = () => {
 const handleFinishGeocode = (e: FinishGeocodeEvent) => {
     checkMarker()
 
-    const res = e.results[0]
+    const res = (e.results[0] as unknown) as NomitnatimResponce
 
     if(!res) return
     result.value = res
@@ -144,11 +146,11 @@ const handleMapClick = (e: L.LeafletMouseEvent) => {
             .openPopup()
 
     geoCoder.reverse(e.latlng, map.options.crs!.scale(18), results => {
-        const res = results[0]
+        const res = (results[0] as unknown) as NomitnatimResponce
 
         if(!res) return
         result.value = res
-        
+
         marker.setLatLng(e.latlng)
             .setPopupContent(res.name)
             .openPopup()
@@ -171,7 +173,6 @@ onMounted(() => {
     geoCoderControll.on('finishgeocode', handleFinishGeocode)
 
     map.on('click', handleMapClick)
-
 })
 
 onUnmounted(() => {

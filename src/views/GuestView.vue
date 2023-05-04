@@ -3,13 +3,13 @@ import GuestLayout from '@/components/layouts/GuestLayout.vue'
 </script>
 
 <template>
-    <GuestLayout>
-        <RouterView v-slot="{ Component }">
+    <RouterView v-slot="{ Component }">
+        <GuestLayout>
             <Transition name="zoom-in">
                 <component :is="Component"></component>
             </Transition>
-        </RouterView>
-    </GuestLayout>
+        </GuestLayout>
+    </RouterView>
 </template>
 
 <style>

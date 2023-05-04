@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import AppLoader from '@/components/AppLoader.vue'
 import { defineAsyncComponent, onMounted, ref } from 'vue'
-import type { geocoders } from 'leaflet-control-geocoder'
 import { ElMessage, type MessageHandler } from 'element-plus'
 import { useI18n } from 'vue-i18n'
+import type { NomitnatimResponce } from '@/components/types'
 
 const AddressMap = defineAsyncComponent({
     loader: () => import('@/components/AppGetAddressFromMap.vue'),
@@ -17,12 +17,12 @@ const LibraryForm = defineAsyncComponent({
 
 const { t } = useI18n()
 
-const resultAddress = ref<geocoders.GeocodingResult | undefined>()
+const resultAddress = ref<NomitnatimResponce | undefined>()
 const showForm = ref(false)
 
 let messageHandler: MessageHandler
 
-const handleNext = (result: geocoders.GeocodingResult | undefined) => {
+const handleNext = (result: NomitnatimResponce | undefined) => {
     if(result) {
         resultAddress.value = result
     }

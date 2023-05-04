@@ -1,25 +1,27 @@
 <script setup lang="ts">
 import { shallowRef } from 'vue'
 import { ElIcon, ElText } from 'element-plus'
-import { School, Collection } from '@element-plus/icons-vue'
+import {
+    School,
+    Collection,
+    SwitchButton,
+    Histogram,
+    User,
+    PieChart
+} from '@element-plus/icons-vue'
 
 const items = [
     {name: 'library-create', text: 'Add Library', icon: shallowRef(School)},
+    {name: 'home', text: 'Update Library', icon: shallowRef(School)},
+    {name: 'home', text: 'Remove Library', icon: shallowRef(School)},
     {name: 'add-book', text: 'Add Book', icon: shallowRef(Collection)},
-    {name: 'home', text: 'Libsdfsdfsd ', icon: shallowRef(School)},
-    {name: 'home', text: 'Lifb', icon: shallowRef(School)},
-    {name: 'home', text: 'Lisdf b', icon: shallowRef(School)},
-    {name: 'home', text: 'Lisdfsdb', icon: shallowRef(School)},
-    {name: 'home', text: 'Libfsd', icon: shallowRef(School)},
-    {name: 'home', text: 'Lib', icon: shallowRef(School)},
-    {name: 'home', text: 'Lib', icon: shallowRef(School)},
-    {name: 'home', text: 'Lib', icon: shallowRef(School)},
-    {name: 'home', text: 'Lib', icon: shallowRef(School)},
-    {name: 'home', text: 'Lib', icon: shallowRef(School)},
-    {name: 'home', text: 'Lib', icon: shallowRef(School)},
-    {name: 'home', text: 'Lib', icon: shallowRef(School)},
-    {name: 'home', text: 'Lib', icon: shallowRef(School)},
-    {name: 'home', text: 'Lib', icon: shallowRef(School)},
+    {name: 'add-book', text: 'Update Book', icon: shallowRef(Collection)},
+    {name: 'add-book', text: 'Remove Book', icon: shallowRef(Collection)},
+
+    {name: 'home', text: 'Analytics', icon: shallowRef(PieChart)},
+    {name: 'home', text: 'Statistics', icon: shallowRef(Histogram)},
+    {name: 'home', text: 'Account', icon: shallowRef(User)},
+    {name: 'home', text: 'Logout', icon: shallowRef(SwitchButton)},
 ]
 </script>
 

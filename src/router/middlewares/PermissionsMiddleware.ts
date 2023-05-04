@@ -1,19 +1,27 @@
-import { ElMessageBox } from "element-plus"
+import { ElMessage, type MessageHandler } from "element-plus"
 import eventBus from '@/composables/eventBus'
 import { i18n } from "@/i18n"
 import type { Middleware } from "./types"
 import { isenumerateDevicesSupport } from "@/utils/CheckSupprot"
 import { isHTTPS } from "@/utils/CommonUtils"
 
-const message = (
-    text: string,
-    title: string = i18n.global.t('app.permissions.title')
-    ) => ElMessageBox.confirm( text, title, {
-    draggable: true,
-    type: 'warning',
-    confirmButtonText: i18n.global.t('app.actions.understood'),
-    cancelButtonClass: 'd-none'
-})
+const notifications: MessageHandler[] = []
+
+const clearNotifications = () => {
+    while(notifications.length > 0) {
+        notifications.pop()?.close()
+    }
+}
+
+const notify = (
+text: string,
+) => notifications.push(ElMessage.info({
+    duration: 5000,
+    message: text,
+    showClose: true,
+    zIndex: 9999
+}))
+
 
 
 const notifyAboutPermission = async (permissionsText: string) => {
@@ -23,13 +31,13 @@ const notifyAboutPermission = async (permissionsText: string) => {
         const status = await navigator.permissions.query({ name })
 
         if (status.state === 'prompt') {
-            message(i18n.global.t('app.permissions.text', {
+            notify(i18n.global.t('app.permissions.text', {
                 permission: permissionsText
             }))
         }
     
         if(status.state === 'denied') {
-            message(i18n.global.t('app.permissions.textDenied', {
+            notify(i18n.global.t('app.permissions.textDenied', {
                 permission: permissionsText
             }))
         }
@@ -44,13 +52,15 @@ const middleware: Middleware = {
     callback: (to, from, next) => {
         const permissions: string[] | unknown = to?.meta?.permissions
 
+        clearNotifications()
+
         if(!Array.isArray(permissions) || permissions?.length === 0) {
             return next()
         }
 
         if(permissions.includes('camera') && !isenumerateDevicesSupport()) {
             const reason = isHTTPS() ? 'apiNotSupported' : 'onlyHTTPS'
-            message(i18n.global.t('app.permissions.' + reason, {
+            notify(i18n.global.t('app.permissions.' + reason, {
                 api: i18n.global.t('app.permissions.camera')
             }))
             return next()

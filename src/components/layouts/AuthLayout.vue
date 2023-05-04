@@ -36,7 +36,7 @@ const paths = [
         icon: shallowRef(HomeFilled)
     },
     {
-        name: 'qr',
+        name: 'scan',
         icon: shallowRef(QrScan)
     },
     {
@@ -65,7 +65,7 @@ const paths = [
         </ElHeader>
         <ElContainer class="middle-container">
             <AsideNavigation :paths="paths" v-if="!mobile"/>
-            <ElMain class="main">
+            <ElMain class="main" :style="{ paddingBottom: mobile ? '60px' : ''} ">
                 <slot></slot>
             </ElMain>
         </ElContainer>
@@ -82,7 +82,7 @@ const paths = [
     z-index: 1000;
 }
 
-.main-container {
+.main-container, .main, .middle-container {
     width: 100%;
     height: 100%;
 }
@@ -93,6 +93,7 @@ const paths = [
 }
 .middle-container {
     position: relative;
+    height: calc(100% - 60px);
 }
 
 .logo {

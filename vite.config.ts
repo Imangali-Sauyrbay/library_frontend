@@ -5,7 +5,7 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import VueI18nPlugin from '@intlify/unplugin-vue-i18n/vite'
 import ElementPlus from 'unplugin-element-plus/vite'
-import mkcert from 'vite-plugin-mkcert'
+//import mkcert from 'vite-plugin-mkcert'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -22,13 +22,13 @@ export default defineConfig({
       allowDynamic: true,
       include: resolve(dirname(fileURLToPath(import.meta.url)), './src/i18n/locales/**'),
     }),
-    mkcert({hosts: ['localhost', '192.168.0.0']})
+    //mkcert({hosts: ['localhost', '192.168.0.0']})
   ],
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
       '@views': fileURLToPath(new URL('./src/views', import.meta.url))
     },
-    extensions: ['.js', '.vue']
+    extensions: ['.js', '.vue', '.ts']
   }
 })

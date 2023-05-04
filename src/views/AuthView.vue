@@ -4,13 +4,6 @@ import AuthLayout from '@/components/layouts/AuthLayout.vue'
 
 <template>
     <AuthLayout>
-        <RouterView v-slot="{ Component }">
-            <Transition name="fade-in" mode="out-in">
-                <component :is="Component"></component>
-            </Transition>
-        </RouterView>
+        <RouterView />
     </AuthLayout>
 </template>
-
-<style scoped>
-</style>

@@ -208,6 +208,20 @@ const onExceedBook: UploadProps['onExceed'] = (files) => {
                 <ElInput type="textarea" v-model="form.description"/>
             </ElFormItem>
 
+            <ElFormItem label="Country" prop="country">
+                <ElInput v-model="form.country"/>
+            </ElFormItem>
+
+
+            <ElFormItem label="Language" prop="lang">
+                <ElInput v-model="form.lang"/>
+            </ElFormItem>
+
+
+            <ElFormItem label="Released year" prop="released">
+                <ElInput v-model="form.released"/>
+            </ElFormItem>
+
 
             <ElFormItem label="Quantity" prop="quantity">
                 <ElInputNumber :min="1" :controls="false" v-model="form.quantity"/>

@@ -5,6 +5,9 @@ import LibraryService from '@/services/LibraryService'
 
 const initial: Book = {
     authors: '',
+    country: '',
+    lang: '',
+    released: 2000,
     description: '',
     title: '',
     identifier: '',
@@ -23,8 +26,11 @@ export const useAddBookStore = defineStore('add-book', () => {
         form.title = initial.title
         form.identifier = initial.identifier
         form.quantity = initial.quantity
-        form.librarySlug = initial.librarySlug,
+        form.librarySlug = initial.librarySlug
         form.coverPage = initial.coverPage
+        form.country = initial.country
+        form.lang = initial.lang
+        form.released = initial.released
     }
 
     const send = (callBack: (progress: number) => void) => {

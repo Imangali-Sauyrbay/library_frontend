@@ -32,7 +32,6 @@
     "leaflet": "^1.9.3",
     "leaflet-control-geocoder": "^2.4.0",
     "mitt": "^3.0.0",
-    "parallax-js": "^3.1.0",
     "pinia": "^2.0.32",
     "raf": "^3.4.1",
     "vue": "^3.2.47",

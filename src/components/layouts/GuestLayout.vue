@@ -22,7 +22,7 @@ const dialogVisible = ref(false)
         <div class="wave"></div>
         <Container class="container">
             <Main class="main">
-                <slot></slot>
+               <slot />
             </Main>
         </Container>
         <AppLangChangeDialog v-model="dialogVisible"/>

@@ -2,7 +2,7 @@ import axios, { type AxiosInstance } from 'axios'
 
 abstract class Service {
     protected readonly axios: AxiosInstance;
-    protected readonly baseUrl: string = 'https://api.s-iman.com'
+    protected readonly baseUrl: string = 'http://localhost:8000'
     protected readonly apiUrl: string = '/api/v1/'
 
     constructor(url?: string) {

@@ -2,6 +2,7 @@
 import { ref, onMounted, onBeforeUnmount, watch } from "vue"
 import { BrowserMultiFormatReader, type Result } from "@zxing/library"
 import { isenumerateDevicesSupport, checkPermission, doesDeviceHasCamera } from "@/utils/CheckSupprot"
+import { onBeforeRouteLeave } from "vue-router"
 
 const isLoading = ref(true)
 const scanner = ref<HTMLVideoElement>()
@@ -108,10 +109,13 @@ onMounted(() => {
     scanner.value?.addEventListener('canplay', loaded)
 })
 
-onBeforeUnmount(() => {
+const reset = () => {
     codeReader.reset()
     removePermissionListeners.forEach(cb => cb())
-})
+}
+
+onBeforeUnmount(reset)
+onBeforeRouteLeave(reset)
 </script>
 
 <template>

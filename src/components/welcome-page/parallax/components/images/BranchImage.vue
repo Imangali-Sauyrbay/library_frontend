@@ -1,18 +1,47 @@
 <script lang="ts" setup>
+import { clamp } from '@/utils/Clamp'
 import type { IParallaxPlant } from './../../utils/types'
 import { randomFloat } from '@/utils/Random'
+import { ref } from 'vue'
+import { images } from '@/components/welcome-page/parallax/utils/parallaxImages'
 
 type prop = {
     item: IParallaxPlant
 }
 
-defineProps<prop>()
+const props = defineProps<prop>()
+
+const branchUrlMap: {
+    [key: number]: string
+} = {
+    1: new URL('@/assets/welcome-parallax/parts/branch_1.png', import.meta.url).href,
+    2: new URL('@/assets/welcome-parallax/parts/branch_2.png', import.meta.url).href,
+    3: new URL('@/assets/welcome-parallax/parts/branch_corner.png', import.meta.url).href
+}
+
+const number = clamp(
+    props.item.classes?.reduce((acc: number, className: string) => {
+        const regex = /^branch-(\d+)$/
+        const match = className.match(regex);
+
+        if(match) {
+            return parseInt(match[1], 10)
+        }
+        
+        return acc;
+    }, 1) || 1,
+    1,
+    3
+)
+
+const url = ref(images.has(branchUrlMap[number]) ? images.get(branchUrlMap[number]) : branchUrlMap[number])
 </script>
 
 <template>
     <div class="branch" :class="item.classes" :style="{
         top: item.style.top + '%',
-        animationDelay: randomFloat(0, 2) + 's'
+        animationDelay: randomFloat(0, 2) + 's',
+        backgroundImage: `url(${url})`
     }">
         <slot></slot>
     </div> 
@@ -39,19 +68,6 @@ defineProps<prop>()
     transform: scale(-2, 2);
     animation: branch-shake 5s ease-in-out infinite;
 }
-
-.branch-1 {
-    background-image: url(@/assets/welcome-parallax/parts/branch_1.png);
-}
-
-.branch-2 {
-    background-image: url(@/assets/welcome-parallax/parts/branch_2.png);
-}
-
-.branch-3 {
-    background-image: url(@/assets/welcome-parallax/parts/branch_corner.png);
-}
-
 
 @include breakpoint('xxxs') {
   .branch {

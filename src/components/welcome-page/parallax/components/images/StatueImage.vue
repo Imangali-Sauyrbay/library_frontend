@@ -1,5 +1,16 @@
+<script lang="ts" setup>
+import { ref } from 'vue'
+import { images } from '@/components/welcome-page/parallax/utils/parallaxImages'
+
+const statueUrl = new URL('@/assets/welcome-parallax/parts/auzov.png', import.meta.url).href
+
+const url = ref(images.has(statueUrl) ? images.get(statueUrl) : statueUrl);
+</script>
+
 <template>
-    <div class="statue">
+    <div class="statue" :style="{
+        backgroundImage: `url(${url})`
+    }">
         <slot></slot>
     </div>
 </template>
@@ -8,7 +19,6 @@
 @import "@/main.scss";
 
 .statue {
-    background-image: url(@/assets/welcome-parallax/parts/auzov.png);
     bottom: -50px;
     left: 50%;
     transform: translate3d(-50%, 0, 0) !important;

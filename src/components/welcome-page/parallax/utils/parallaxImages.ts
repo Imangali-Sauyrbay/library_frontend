@@ -67,24 +67,39 @@ const urlsToAllAssets = [
     new URL('@/assets/welcome-parallax/parts/branch_corner.png', import.meta.url).href,
 ]
 
+
+const images = new Map<string, string>()
+
 const ensureImagesAreLoaded = (
     urls: string[],
     percent: number,
     onProgress: (total: number, loaded: number, failed: number) => void
     = () => {},
-    maxConcurrency: number = 2): Promise<void> => {
+    maxConcurrency: number = 2
+): Promise<void> => {
     let loaded = 0
     let failed = 0
     const total = urls.length
     const target = Math.ceil(total * (percent / 100))
+    const canvas = document.createElement('canvas');
+    const context = canvas.getContext('2d');
 
     const loadImage = (url: string): () => Promise<void> => {
         return () => new Promise((resolve, reject) => {
             const img = new Image()
 
             img.onload = () => {
-                loaded++
-                resolve()
+                canvas.width = img.width
+                canvas.height = img.height
+                context?.drawImage(img, 0, 0)
+                canvas.toBlob((blob) => {
+                    if(blob) {
+                        images.set(url, URL.createObjectURL(blob));
+                    }
+                });
+
+                loaded++;
+                resolve();
             }
 
             img.onerror = () => {
@@ -140,6 +155,7 @@ const ensureImagesAreLoaded = (
 export {
     ensureImagesAreLoaded,
     urlsToAllAssets,
+    images
 }
 
 

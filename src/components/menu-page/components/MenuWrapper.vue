@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { shallowRef } from 'vue'
+import { reactive, shallowRef, type ShallowRef } from 'vue'
 import { ElIcon, ElText } from 'element-plus'
 import {
     School,
@@ -10,29 +10,65 @@ import {
     PieChart
 } from '@element-plus/icons-vue'
 
-const items = [
-    {name: 'library-create', text: 'Add Library', icon: shallowRef(School)},
-    {name: 'home', text: 'Update Library', icon: shallowRef(School)},
-    {name: 'home', text: 'Remove Library', icon: shallowRef(School)},
-    {name: 'add-book', text: 'Add Book', icon: shallowRef(Collection)},
-    {name: 'add-book', text: 'Update Book', icon: shallowRef(Collection)},
-    {name: 'add-book', text: 'Remove Book', icon: shallowRef(Collection)},
+import authService, { Roles } from '@/services/AuthService'
+import { useRouter } from 'vue-router'
+const router = useRouter()
 
-    {name: 'home', text: 'Analytics', icon: shallowRef(PieChart)},
+type MenuItems = {
+    name: string
+    text: string
+    icon: ShallowRef,
+    onClick?: () => void
+}
+
+const items = reactive<MenuItems[]>([
     {name: 'home', text: 'Statistics', icon: shallowRef(Histogram)},
     {name: 'home', text: 'Account', icon: shallowRef(User)},
-    {name: 'home', text: 'Logout', icon: shallowRef(SwitchButton)},
-]
+    {name: 'home', text: 'Logout', icon: shallowRef(SwitchButton), onClick: () => {
+        authService.logout().then(() => {
+            router.push({name: 'home'})
+        })
+    }},
+])
+
+import { useI18n } from 'vue-i18n'
+import { ElMessage } from 'element-plus'
+
+const { t } = useI18n()
+
+const checkUserStatus = async () => {
+    try {
+        let canUserAccess = await authService.hasRole(Roles.ADMIN) || await authService.hasRole(Roles.COWORKER)
+
+        const menuItems =  canUserAccess ? [
+            {name: 'library-create', text: 'Add Library', icon: shallowRef(School)},
+            {name: 'home', text: 'Update Library', icon: shallowRef(School)},
+            {name: 'home', text: 'Remove Library', icon: shallowRef(School)},
+            {name: 'add-book', text: 'Add Book', icon: shallowRef(Collection)},
+            {name: 'add-book', text: 'Update Book', icon: shallowRef(Collection)},
+            {name: 'add-book', text: 'Remove Book', icon: shallowRef(Collection)},
+            {name: 'home', text: 'Analytics', icon: shallowRef(PieChart)}
+        ] : []
+
+        items.unshift(...menuItems)
+    } catch (error) {
+        ElMessage({
+            message: t('pages.auth.loadFailed'),
+            type: 'error'
+        })
+    }
+}
+checkUserStatus()
 </script>
 
 <template>
     <div class="container-grid">
 
-        <div class="item" v-for="({name, text, icon}) in items" :key="name">
+        <div class="item" v-for="({name, text, icon, onClick}) in items" :key="name">
             <RouterLink :to="{name}" custom v-slot="{navigate}">
-                <div class="btn" @click="navigate">
+                <div class="btn" @click="onClick ? onClick() : navigate()">
                     <ElIcon size="30px" color="green">
-                        <component :is='icon.value'></component>
+                        <component :is='icon'></component>
                     </ElIcon>
 
                     <ElText tag="p" size="small">{{ text }}</ElText>

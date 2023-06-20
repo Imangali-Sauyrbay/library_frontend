@@ -25,6 +25,7 @@ class Parallax {
     public onDeviceMotionNotSupported: () => void = () => {}
     public invertX: boolean = true
     public invertY: boolean = true
+    public fpsPerSec = 60;
     
     private selector: string | null = null
     private inputElement:  HTMLElement | null = null
@@ -459,6 +460,7 @@ class Parallax {
         if ((Math.abs(calibratedInputX) > this.calibrationThreshold) || (Math.abs(calibratedInputY) > this.calibrationThreshold)) {
             this.queueCalibration(0)
         }
+        
         if (this.portrait) {
             this.motionX = this.calibrateX ? calibratedInputY : this.inputY
             this.motionY = this.calibrateY ? calibratedInputX : this.inputX
@@ -498,7 +500,9 @@ class Parallax {
             this.setPosition(layer, xOffset, yOffset)
         }
 
-        this.raf = rqAnFr(this.onAnimationFrame)
+        setTimeout(() => {
+            this.raf = rqAnFr(this.onAnimationFrame)
+        }, 1000 / this.fpsPerSec);
     }
 
     private rotate(beta: number, gamma: number): void{

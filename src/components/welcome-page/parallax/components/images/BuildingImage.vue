@@ -1,5 +1,16 @@
+<script lang="ts" setup>
+import { ref } from 'vue'
+import { images } from '@/components/welcome-page/parallax/utils/parallaxImages'
+
+const buildingUrl = new URL('@/assets/welcome-parallax/ukgu_building.png', import.meta.url).href
+
+const url = ref(images.has(buildingUrl) ? images.get(buildingUrl) : buildingUrl);
+</script>
+
 <template>
-    <div class="building">
+    <div class="building" :style="{
+        backgroundImage: `url(${url})`
+    }">
         <slot></slot>
     </div>
 </template>
@@ -8,7 +19,6 @@
 @import "@/main.scss";
 
 .building {
-    background-image: url(@/assets/welcome-parallax/ukgu_building.png);
     bottom: -30%;
     left: -50%;
     width: 200%;

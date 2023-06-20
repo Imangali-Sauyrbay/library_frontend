@@ -13,8 +13,6 @@ type Library = {
     address: LibraryAddress
 }
 
-
-
 interface BookResponce {
     hits:             Hit[]
     query:            string
@@ -63,7 +61,6 @@ interface Match {
     text:  string
 }
 
-
 interface LibraryResponce {
     title:      string;
     slug:       string;
@@ -71,8 +68,6 @@ interface LibraryResponce {
     updated_at: string;
     address:    LibraryAddress;
 }
-
-
 
 class LibraryService extends BaseService {
     public async getLibrary(query: string, page: number = 1) {

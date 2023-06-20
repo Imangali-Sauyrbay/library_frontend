@@ -45,7 +45,7 @@ const rules = reactive<FormRules>({
             message: t('validation.passwordNotMatch'),
             validator: (rule, value, cb) => {
                 if(value !== form.password) {
-                    cb(new Error())
+                   return cb(new Error())
                 }
 
                 cb()
@@ -60,17 +60,58 @@ const rules = reactive<FormRules>({
     ]
 })
 
+import authService from '@/services/AuthService'
+import { useRouter, useRoute } from 'vue-router'
+const router = useRouter()
+const route = useRoute()
+
+const uuid = Array.isArray(route.params?.uuid) ? route.params?.uuid[0] : route.params?.uuid
+
 const onSubmit = async (formEl: FormInstance | undefined) => {
     if (!formEl) return
 
-    await formEl.validate((isValid) => {
+    await formEl.validate(async (isValid) => {
         if (!isValid) return
-        alert('ok')
+        
+        const res = await authService.register(
+            form.email,
+            form.password,
+            form.confirmPassword,
+            uuid
+        )
+
+        console.log(res);
+        router.push({name: 'home'})
     })
 }
 
+import regLinkService from '@/services/RegLinkService'
+const title = ref('pages.auth.RegisterUser')
+let paramsToTranslate: Record<string, string> = {};
+
 onMounted(() => {
-   cardBody.value = childCard.value?.card.$el.firstElementChild
+    cardBody.value = childCard.value?.card.$el.firstElementChild
+    regLinkService.getLink(uuid)
+    .then(res => {
+        if(res.data.use_count <= 0) {
+            return router.replace({name: 'register'})
+        }
+
+        switch(res.data.role?.name) {
+            case 'coworker':
+                title.value = 'pages.auth.RegisterCoworker'
+                paramsToTranslate['library'] = res.data.library?.title || ''
+                break;
+            case 'student':
+                title.value = 'pages.auth.RegisterStudent'
+                break;
+            case 'admin':
+                title.value = 'pages.auth.RegisterAdmin'
+        }
+    })
+    .catch(() => {
+        router.replace({name: 'register'})
+    })
 })
 </script>
 
@@ -83,10 +124,11 @@ onMounted(() => {
             ref="formEl"
             :model="form"
             :rules="rules">
+            <h3 style="margin-bottom: 1rem; color: var(--el-text-color-regular);">{{t(title, paramsToTranslate)}}</h3>
                 <div class="form_items">
                     <el-form-item :label="t('pages.auth.email')" prop="email">
                         <el-input v-model="form.email"></el-input>
-                    </el-form-item>
+                    </el-form-item> 
                     <el-form-item :label="t('pages.auth.password')" prop="password">
                         <el-input v-model="form.password" type="password"></el-input>
                     </el-form-item>

@@ -1,10 +1,18 @@
 <script lang="ts" setup>
 import type { IParallaxCloud } from './../../utils/types'
+import { ref } from 'vue'
+import { images } from '@/components/welcome-page/parallax/utils/parallaxImages'
+
 defineProps<{item: IParallaxCloud}>()
+
+const cloudUrl = new URL('@/assets/welcome-parallax/parts/cloud_big.png', import.meta.url).href
+const url = ref(images.has(cloudUrl) ? images.get(cloudUrl) : cloudUrl);
 </script>
 
 <template>
-    <div class="cloud-big" :class="item.classes">
+    <div class="cloud-big" :class="item.classes" :style="{
+        backgroundImage: `url(${url})`
+    }">
         <slot></slot>
     </div>
 </template>
@@ -13,7 +21,6 @@ defineProps<{item: IParallaxCloud}>()
 @import "@/main.scss";
 
 .cloud-big {
-    background-image: url(@/assets/welcome-parallax/parts/cloud_big.png);
     width: 30%;
     height: 30%;
     left: 0;

@@ -2,6 +2,10 @@
 import { computed, ref } from 'vue'
 import { getHeightByDistance, toLocalePercent, domRectStub, calculatePixelValues } from './utils';
 import type { IParallaxCloud } from './../../utils/types'
+import { clamp } from '@/utils/Clamp'
+import { images } from '@/components/welcome-page/parallax/utils/parallaxImages'
+
+
 const props = defineProps<{item: IParallaxCloud}>()
 const cloud = ref<HTMLDivElement>()
 
@@ -21,10 +25,39 @@ const transform = computed(() => {
 })
 
 const height = computed(() => getHeightByDistance(props.item.depth))
+
+const cloudUrlMap: {
+    [key: number]: string
+} = {
+    1: new URL('@/assets/welcome-parallax/parts/cloud_small_1.png', import.meta.url).href,
+    2: new URL('@/assets/welcome-parallax/parts/cloud_small_2.png', import.meta.url).href,
+    3: new URL('@/assets/welcome-parallax/parts/cloud_small_3.png', import.meta.url).href
+}
+
+const number = clamp(
+    props.item.classes?.reduce((acc: number, className: string) => {
+        const regex = /^cloud-(\d+)$/
+        const match = className.match(regex);
+
+        if(match) {
+            return parseInt(match[1], 10)
+        }
+        
+        return acc;
+    }, 1) || 1,
+    1,
+    3
+)
+
+const url = ref(images.has(cloudUrlMap[number]) ? images.get(cloudUrlMap[number]) : cloudUrlMap[number])
 </script>
 
 <template>
-    <div class="cloud-small" ref="cloud" :class="item.classes" :style="{transform, height}">
+    <div class="cloud-small" ref="cloud" :class="item.classes" :style="{
+        transform,
+        height,
+        backgroundImage: `url(${url})`
+    }">
         <slot></slot>
     </div> 
 </template>
@@ -36,17 +69,5 @@ const height = computed(() => getHeightByDistance(props.item.depth))
     position: absolute;
     top: 0;
     left: 0;
-}
-
-.cloud-1 {
-    background-image: url(@/assets/welcome-parallax/parts/cloud_small_1.png);
-}
-
-.cloud-2 {
-    background-image: url(@/assets/welcome-parallax/parts/cloud_small_2.png);
-}
-
-.cloud-3 {
-    background-image: url(@/assets/welcome-parallax/parts/cloud_small_3.png);
 }
 </style>

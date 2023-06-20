@@ -47,8 +47,8 @@ const onSubmit = async (formEl: FormInstance | undefined) => {
 
     await formEl.validate(async (isValid) => {
         if (!isValid) return
-        const code = await authService.login(form.email, form.password)
-        if(code === 200) {
+        const res = await authService.login(form.email, form.password)
+        if(res.status === 200) {
             router.push({name: 'home'})
         }
     })

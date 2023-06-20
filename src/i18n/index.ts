@@ -20,6 +20,9 @@ const i18n = createI18n({
     legacy: false,
     fallbackLocale: defaultLocale,
     locale,
+    fallbackWarn: false,
+    warnHtmlMessage: false,
+    missingWarn: false,
     pluralRules: {
         ru: slavicPlural
     }

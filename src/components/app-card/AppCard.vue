@@ -13,7 +13,7 @@ defineProps<{showLogo?: boolean}>()
 
 <template>
     <ElCard class="card" ref="card">
-        <RouterLink v-if="showLogo ?? true" :to="{name: 'home'}" custom v-slot="{navigate}">
+        <RouterLink v-if="showLogo ?? true" :to="{name: 'welcome'}" custom v-slot="{navigate}">
             <AppLogo @click="navigate" class="logo" fit="contain" />
         </RouterLink>
         <slot></slot>

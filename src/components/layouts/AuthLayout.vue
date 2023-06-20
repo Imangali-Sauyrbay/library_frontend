@@ -58,9 +58,6 @@ const paths = [
                 <ElCol :span="4">
                     <ElImage class="logo" :src="Logo" fit="contain"/>
                 </ElCol>
-                <ElCol :span="4">
-                    <!-- AVATAR -->
-                </ElCol>
             </ElRow>
         </ElHeader>
         <ElContainer class="middle-container">

@@ -13,7 +13,7 @@ const route: RouteRecordRaw = {
             }
         },
         {
-            path: 'register',
+            path: 'register/:uuid?',
             component: () => import('@views/RegisterView.vue'),
             name: 'register',
             meta: {

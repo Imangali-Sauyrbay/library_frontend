@@ -5,23 +5,25 @@ abstract class Service {
     protected readonly baseUrl: string = 'http://localhost:8000'
     protected readonly apiUrl: string = '/api/v1/'
 
-    constructor(url?: string) {
-        if(url) {
-            this.baseUrl = url
+    constructor(baseUrl?: string) {
+        if(baseUrl) {
+            this.baseUrl = baseUrl
         } else {
-            url = this.baseUrl + this.apiUrl
+            baseUrl = this.baseUrl + this.apiUrl
         }
 
         this.axios = axios.create({
-            baseURL: url,
+            baseURL: baseUrl,
             withCredentials: true,
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             }
         })
+    }
 
-        this.axios.get(this.baseUrl + '/sanctum/csrf-cookie')
+    protected async csrf() {
+        return await this.axios.get(this.baseUrl + '/sanctum/csrf-cookie')
     }
 }
 

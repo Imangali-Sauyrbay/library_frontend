@@ -13,12 +13,22 @@
             "confirm": "Confirm",
             "cancel": "Cancel",
             "understood": "Ok",
-            "next": "Next"
+            "next": "Next",
+            "submit": "Submit"
+        },
+
+        "messages": {
+            "success": "Success!",
+            "error": "Error!",
+            "tryLater": "Please try again later!"
         },
 
         "errors": {
             "notFound": "Not Found!",
-            "notFoundDesc": "The page you are looking for does not exist."
+            "notFoundDesc": "The page you are looking for does not exist.",
+            "notFilled": "Error filling data, please try again later!",
+            "toManyRequests": "Too Many Requests!",
+            "validationError": "Field \"{field}\" is invalid! it should be in format: \"{format}\"!"
         },
 
         "redirects": {
@@ -57,6 +67,21 @@
                 "permissionDenied": "Permission denied!",
                 "timedOut": "Timed out!"
             }
+        },
+
+        "response": {
+            "formats": {
+                "IIN": {
+                    "regex": "12 numbers"
+                },
+                "string": "String"
+            }
+        },
+
+        "time": {
+            "select": {
+                "date": "Select date"
+            }
         }
     },
 
@@ -89,10 +114,16 @@
 
         "auth": {
             "email": "Email",
+            "fill": "Please fill this before using!",
+            "loadFailed": "Loading user information was failed!",
             "password": "Password",
             "confirmPassword": "Confirm Password",
             "register": "Register",
-            "login": "Login"
+            "login": "Login",
+            "RegisterUser": "Registration!",
+            "RegisterStudent": "Registration of student!",
+            "RegisterCoworker": "Registration of Employee for Library \"{library}\"!",
+            "RegisterAdmin": "Registration of Admin!"
         },
 
         "nav": {
@@ -126,5 +157,17 @@
         "invalidEmail": "Please enter a valid email!",
         "minLength": "{field} should be at least {n} characters!",
         "passwordNotMatch": "Passwords not match!"
-    }
+    },
+
+
+
+    "firstname": "First Name",
+    "lastname": "Last Name",
+    "patronymic": "Patronymic",
+    "faculty": "Faculty",
+    "department": "Department",
+    "group": "Group",
+    "IIN": "IIN",
+    "admission_at": "Admission at",
+    "graduation_at": "Graduation at"
 }

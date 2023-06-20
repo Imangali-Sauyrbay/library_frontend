@@ -10,6 +10,7 @@ const route: RouteRecordRaw = {
             component: () => import('@views/HomeView.vue'),
             meta: {
                 title: 'home',
+                auth: true
             }
         },
 
@@ -20,6 +21,7 @@ const route: RouteRecordRaw = {
             meta: {
                 permissions: ['camera'],
                 title: 'scan',
+                auth: true
             }
         },
 
@@ -32,6 +34,7 @@ const route: RouteRecordRaw = {
                     component: () => import('@views/MenuView.vue'),
                     meta: {
                         title: 'menu',
+                        auth: true
                     },
                 },
                 {
@@ -39,6 +42,7 @@ const route: RouteRecordRaw = {
                     name: 'library-create',
                     component: () => import('@views/AddLibraryView.vue'),
                     meta: {
+                        auth: true
                     }
                 },
                 {
@@ -46,6 +50,7 @@ const route: RouteRecordRaw = {
                     name: 'add-book',
                     component: () => import('@views/AddBookView.vue'),
                     meta: {
+                        auth: true
                     }
                 }
             ]
@@ -57,6 +62,7 @@ const route: RouteRecordRaw = {
             component: () => import('@views/SearchBookView.vue'),
             meta: {
                 title: 'search',
+                auth: true
             }
         }
     ]
